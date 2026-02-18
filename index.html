@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎉 Happy Birthday Marhaba! 🦋</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@300;500;700&family=Pacifico&family=Satisfy&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-pink: #ff69b4;
+            --frosting-pink: #ff85c1;
+            --cake-brown: #6b4423;
+            --cream-white: #fff5e6;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 50%, #fde4e4 100%);
+            overflow-x: hidden;
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+
+        .cursive { font-family: 'Dancing Script', cursive; font-weight: 700; }
+        .script-font { font-family: 'Satisfy', cursive; }
+
+        /* Butterfly Animation */
+        .butterfly {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            pointer-events: none;
+            z-index: 10;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+            opacity: 0.95;
+        }
+
+        @keyframes fly {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(100px, -50px) rotate(20deg); }
+            50% { transform: translate(200px, 0px) rotate(-20deg); }
+            75% { transform: translate(100px, 50px) rotate(10deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { filter: drop-shadow(0 0 5px rgba(255, 105, 180, 0.5)); }
+            50% { filter: drop-shadow(0 0 15px rgba(255, 105, 180, 0.8)); }
+        }
+
+        /* Enhanced Floating Balloons */
+        .balloon {
+            position: fixed;
+            width: 50px;
+            height: 60px;
+            border-radius: 50% 50% 50% 0;
+            pointer-events: none;
+            z-index: 5;
+            animation: float 3s ease-in-out infinite, rise 6s ease-in forwards;
+        }
+
+        @keyframes rise {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- THE REALISTIC CAKE --- */
+        .cake-scene {
+            position: relative;
+            height: 380px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            margin-top: 50px;
+            perspective: 1200px;
+            animation: cake-shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes cake-shimmer {
+            0%, 100% { filter: drop-shadow(0 20px 40px rgba(0,0,0,0.3)); }
+            50% { filter: drop-shadow(0 25px 50px rgba(255, 105, 180, 0.2)); }
+        }
+
+        /* Golden Plate */
+        .plate {
+            width: 340px;
+            height: 110px;
+            background: radial-gradient(ellipse at 50% 30%, #ffed4e 0%, #ffd700 20%, #b8860b 70%, #8b4513 95%);
+            border-radius: 50%;
+            position: absolute;
+            bottom: -10px;
+            box-shadow: 
+                0 30px 60px rgba(0,0,0,0.4),
+                inset 0 -8px 15px rgba(0,0,0,0.2),
+                inset 0 5px 15px rgba(255,255,255,0.6);
+            z-index: 1;
+        }
+
+        .cake-body {
+            position: relative;
+            width: 240px;
+            height: 180px;
+            z-index: 2;
+            border-radius: 15px 15px 25px 25px;
+            transform-style: preserve-3d;
+            background: repeating-linear-gradient(
+                to bottom,
+                #8b5d3f 0px, #8b5d3f 45px,
+                #fff5e6 45px, #fff5e6 54px,
+                #8b5d3f 54px, #8b5d3f 100px,
+                #f5ddc5 100px, #f5ddc5 108px
+            );
+            box-shadow: 
+                inset -25px 0 40px rgba(0,0,0,0.4),
+                inset 20px 0 30px rgba(255,255,255,0.1),
+                20px 15px 35px rgba(0,0,0,0.3);
+        }
+
+        .frosting-top {
+            position: absolute;
+            top: -18px;
+            width: 100%;
+            height: 45px;
+            background: linear-gradient(135deg, #ff69b4 0%, #ff85c1 30%, #ff1493 50%, #ff85c1 70%, #ff69b4 100%);
+            border-radius: 60% 60% 50% 50%;
+            z-index: 3;
+            box-shadow: 
+                inset -10px -8px 15px rgba(0,0,0,0.15),
+                inset 8px 6px 12px rgba(255,255,255,0.4),
+                0 8px 20px rgba(255, 105, 180, 0.5);
+        }
+
+        .drip {
+            position: absolute;
+            width: 18px;
+            background: linear-gradient(to bottom, #ff85c1 0%, #ff69b4 100%);
+            border-radius: 0 0 25px 25px;
+            z-index: 2;
+            box-shadow: 
+                inset -3px 0 5px rgba(0,0,0,0.1),
+                3px 3px 8px rgba(0,0,0,0.15);
+        }
+
+        .strawberry {
+            position: absolute;
+            width: 25px;
+            height: 30px;
+            background: radial-gradient(circle at 30% 30%, #ff4d4d 0%, #b30000 100%);
+            border-radius: 50% 50% 40% 40% / 60% 60% 40% 40%;
+            top: -25px;
+            z-index: 4;
+            transform: rotate(-10deg);
+        }
+        .strawberry::after {
+            content: 'v';
+            color: #2d5a27;
+            position: absolute;
+            top: -5px;
+            left: 8px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .candle-group {
+            position: absolute;
+            top: -75px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 45px;
+            z-index: 5;
+            animation: candle-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes candle-glow {
+            0%, 100% { filter: drop-shadow(0 0 5px rgba(255, 200, 0, 0.3)); }
+            50% { filter: drop-shadow(0 0 20px rgba(255, 200, 0, 0.6)); }
+        }
+
+        .candle {
+            width: 14px;
+            height: 65px;
+            background: linear-gradient(to right, #f0f0f0, #ffffff, #f0f0f0);
+            border-radius: 5px;
+            position: relative;
+            box-shadow: inset -2px 0 3px rgba(0,0,0,0.1);
+            transform: perspective(600px) rotateX(8deg);
+        }
+
+        .candle:nth-child(2) {
+            height: 80px;
+            z-index: 10;
+        }
+
+        .flame {
+            width: 18px;
+            height: 32px;
+            background: linear-gradient(to top, 
+                #ff4500 0%, 
+                #ff6b35 20%,
+                #ffaa00 50%, 
+                #ffdd00 80%,
+                #ffff99 100%);
+            border-radius: 50% 50% 25% 25%;
+            position: absolute;
+            bottom: 105%;
+            left: -2px;
+            filter: drop-shadow(0 0 12px #ff6b35) drop-shadow(0 0 25px rgba(255, 100, 0, 0.6));
+            animation: dancing-flame 0.4s infinite ease-in-out;
+        }
+
+        @keyframes dancing-flame {
+            0% { 
+                transform: scaleX(0.9) scaleY(0.85) rotate(-3deg) translateY(2px);
+                opacity: 0.85;
+            }
+            50% {
+                transform: scaleX(1) scaleY(1) rotate(0deg) translateY(0px);
+                opacity: 0.95;
+            }
+            100% { 
+                transform: scaleX(1.1) scaleY(1.15) rotate(3deg) translateY(-2px);
+                opacity: 1;
+            }
+        }
+
+        .flame.extinguished { 
+            display: none !important;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 12px 40px rgba(31, 38, 135, 0.2);
+        }
+
+        .butterfly-frame {
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .butterfly-frame img {
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover;
+            border-radius: 50% 50% 10% 50%;
+            border: 5px solid white;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .butterfly-frame:hover img { 
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 20px 50px rgba(255, 105, 180, 0.4);
+        }
+
+        .btn-birthday {
+            background: linear-gradient(135deg, #ff69b4 20%, #ffd700 80%);
+            transition: all 0.3s ease;
+            font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 20px rgba(255, 105, 180, 0.4);
+        }
+
+        .btn-birthday:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255, 105, 180, 0.6);
+        }
+
+        .btn-birthday:active {
+            transform: translateY(-1px);
+        }
+
+        .special-gift-container {
+            animation: bounce 2.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.05); }
+        }
+
+        .signature {
+            border-top: 2px dashed #ff69b4;
+            padding-top: 15px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        /* Modal Enhancement */
+        #modal {
+            animation: modal-fade-in 0.4s ease-out;
+        }
+
+        @keyframes modal-fade-in {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        #modal > div {
+            animation: modal-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes modal-pop {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Responsive Improvements */
+        @media (max-width: 768px) {
+            .cake-scene { height: 300px; margin-top: 30px; }
+            .cake-body { width: 200px; height: 150px; }
+            .plate { width: 280px; height: 90px; }
+            .candle-group { gap: 30px; top: -60px; }
+            .butterfly-frame { width: 120px !important; height: 120px !important; }
+            .special-gift-container { margin-top: 20px; }
+            h1 { font-size: 2.5rem !important; }
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center p-4">
+
+    <!-- Header -->
+    <header class="text-center py-10 w-full">
+        <h1 class="text-6xl md:text-8xl cursive text-white drop-shadow-2xl">🎉 Happy Birthday Marhaba! 🎉</h1>
+        <p class="text-2xl script-font text-white mt-4">May your day be filled with magic and butterflies</p>
+    </header>
+
+    <!-- Photo Gallery -->
+    <section class="flex flex-wrap justify-center gap-8 mb-16">
+        <div class="butterfly-frame w-40 h-40 relative">
+            <img src="photo 1.jpg" alt="Photo 1" onerror="this.src='https://via.placeholder.com/200/FF69B4/FFFFFF?text=Photo+1'">
+        </div>
+        <div class="butterfly-frame w-40 h-40 relative">
+            <img src="2.png" alt="Photo 2" onerror="this.src='https://via.placeholder.com/200/FFD700/000000?text=Photo+2'">
+        </div>
+        <div class="butterfly-frame w-40 h-40 relative">
+            <img src="photo 3.png" alt="Photo 3" onerror="this.src='https://via.placeholder.com/200/FFB6D9/000000?text=Photo+3'">
+        </div>
+    </section>
+
+    <!-- Cake Section -->
+    <section class="glass rounded-3xl p-10 mb-16 w-full max-w-2xl text-center">
+        <h2 class="text-3xl cursive text-white mb-8">✨ Make a Magical Wish! ✨</h2>
+        
+        <div class="cake-scene">
+            <div class="plate"></div>
+            <div class="cake-body">
+                <div class="frosting-top"></div>
+                <div class="drip" style="left: 10%; height: 50px;"></div>
+                <div class="drip" style="left: 25%; height: 30px;"></div>
+                <div class="drip" style="left: 45%; height: 60px;"></div>
+                <div class="drip" style="left: 70%; height: 40px;"></div>
+                <div class="drip" style="left: 85%; height: 35px;"></div>
+                <div class="strawberry" style="left: 20%; top: -30px;"></div>
+                <div class="strawberry" style="left: 50%; top: -35px; transform: rotate(15deg);"></div>
+                <div class="strawberry" style="left: 80%; top: -30px; transform: rotate(-5deg);"></div>
+                <div class="candle-group">
+                    <div class="candle"><div class="flame"></div></div>
+                    <div class="candle" style="height: 75px; top: -15px;"><div class="flame"></div></div>
+                    <div class="candle"><div class="flame"></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-12 flex flex-col items-center gap-4">
+            <button id="start-mic" class="btn-birthday px-10 py-4 rounded-full text-white font-bold shadow-xl hover:scale-105 transition">
+                🎤 Click to Blow Candles
+            </button>
+            <div id="mic-indicator" class="mic-status hidden text-white">
+                <span class="inline-block w-3 h-3 bg-green-400 rounded-full animate-pulse mr-2"></span>
+                Ready! Blow into the mic...
+            </div>
+        </div>
+    </section>
+
+    <!-- Gifts -->
+    <section class="mb-10 w-full max-w-4xl text-center">
+        <h2 class="text-4xl cursive text-white mb-10"> Open Your Surprises </h2>
+        <div class="flex flex-wrap justify-center gap-12 mb-20">
+            <div onclick="openGift('Health & Happiness')" class="text-7xl cursor-pointer hover:scale-125 transition drop-shadow-lg">🎁</div>
+            <div onclick="openGift('Success & Dreams')" class="text-7xl cursor-pointer hover:scale-125 transition drop-shadow-lg">🎀</div>
+            <div onclick="openGift('Magic & Joy')" class="text-7xl cursor-pointer hover:scale-125 transition drop-shadow-lg">🎊</div>
+        </div>
+
+        <!-- SPECIAL GIFT AT BOTTOM -->
+        <div class="special-gift-container mt-10">
+            <h3 class="text-2xl script-font text-white mb-4">The Most Special One...</h3>
+            <div onclick="openSpecialGift()" class="text-9xl cursor-pointer hover:scale-110 transition drop-shadow-2xl">💖</div>
+            <p class="text-white mt-4 font-bold tracking-widest">TAP FOR THE ULTIMATE WISH</p>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="modal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-md flex items-center justify-center p-6">
+        <div class="bg-white rounded-3xl p-10 max-w-md w-full text-center shadow-2xl">
+            <h3 class="text-4xl cursive text-pink-500 mb-4" id="modal-title">Surprise!</h3>
+            <p class="text-gray-600 text-lg leading-relaxed mb-6" id="modal-text">Message here...</p>
+            <div id="signature-block" class="hidden">
+                <p class="text-gray-400 text-sm italic">Sending you infinite joy and butterflies,</p>
+                <div class="signature">
+                    <span class="script-font text-3xl text-pink-600">Akshat Sharma</span>
+                </div>
+            </div>
+            <button onclick="closeModal()" class="btn-birthday mt-8 px-10 py-3 rounded-full text-white font-bold shadow-lg">Close</button>
+        </div>
+    </div>
+
+    <audio id="horn" src="https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3"></audio>
+
+    <script>
+        // Enhanced Butterfly System with More Variety
+        function createButterfly() {
+            const b = document.createElement('div');
+            b.className = 'butterfly';
+            const colors = ['#ff69b4', '#ffd700', '#00e5c3', '#ff85c1', '#ff1493'];
+            const randomColor = colors[Math.floor(Math.random()*colors.length)];
+            b.innerHTML = `<svg viewBox="0 0 100 100" fill="${randomColor}" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2))"><ellipse cx="30" cy="30" rx="20" ry="25"/><ellipse cx="70" cy="30" rx="20" ry="25"/><ellipse cx="30" cy="70" rx="15" ry="20" opacity="0.7"/><ellipse cx="70" cy="70" rx="15" ry="20" opacity="0.7"/><circle cx="50" cy="50" r="8" fill="white"/></svg>`;
+            b.style.left = Math.random() * 100 + 'vw';
+            b.style.top = Math.random() * 100 + 'vh';
+            const duration = 5 + Math.random() * 8;
+            b.style.animation = `fly ${duration}s infinite ease-in-out`;
+            document.body.appendChild(b);
+        }
+
+        // Create initial butterflies
+        for(let i = 0; i < 8; i++) createButterfly();
+
+        // Create balloons on page load
+        function createBalloon() {
+            const ballon = document.createElement('div');
+            ballon.className = 'balloon';
+            const balloonColors = ['#ff69b4', '#ffd700', '#00e5c3', '#ff1493', '#ffaa00'];
+            ballon.style.background = balloonColors[Math.floor(Math.random() * balloonColors.length)];
+            ballon.style.left = Math.random() * 80 + 10 + '%';
+            ballon.style.bottom = '-80px';
+            ballon.style.animationDelay = (Math.random() * 2) + 's';
+            document.body.appendChild(ballon);
+            setTimeout(() => ballon.remove(), 8000);
+        }
+
+        // Periodic balloon creation
+        setInterval(() => createBalloon(), 3000);
+
+        // Mic logic - Enhanced
+        const startBtn = document.getElementById('start-mic');
+        const micIndicator = document.getElementById('mic-indicator');
+        const flames = document.querySelectorAll('.flame');
+        let extinguished = false;
+
+        startBtn.onclick = async () => {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                startBtn.classList.add('hidden');
+                micIndicator.classList.remove('hidden');
+                
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const analyser = audioContext.createAnalyser();
+                const source = audioContext.createMediaStreamSource(stream);
+                source.connect(analyser);
+                analyser.fftSize = 256;
+                const data = new Uint8Array(analyser.frequencyBinCount);
+                
+                function check() {
+                    if (extinguished) return;
+                    analyser.getByteFrequencyData(data);
+                    const vol = data.reduce((a, b) => a + b) / data.length;
+                    if (vol > 50) blowOut();
+                    requestAnimationFrame(check);
+                }
+                check();
+            } catch (e) {
+                startBtn.innerText = "🕯️ Tap candles to blow!";
+                startBtn.classList.remove('hidden');
+                startBtn.style.cursor = 'pointer';
+                startBtn.onclick = blowOut;
+            }
+        };
+
+        function blowOut() {
+            if (extinguished) return;
+            extinguished = true;
+            flames.forEach(f => f.classList.add('extinguished'));
+            document.getElementById('horn').play().catch(() => {});
+            micIndicator.innerHTML = "✨ Wish Granted! Your Birthday Magic is Activated! ✨";
+            
+            // Create confetti and more butterflies
+            for(let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    createButterfly();
+                    createBalloon();
+                }, i * 40);
+            }
+        }
+
+        // Gifts - Enhanced
+        function openGift(type) {
+            document.getElementById('signature-block').classList.add('hidden');
+            document.getElementById('modal-title').innerText = '🎁 ' + type;
+            const messages = {
+                'Health & Happiness': 'May you be blessed with perfect health, boundless happiness, and a heart full of joy throughout this beautiful year! 💝',
+                'Success & Dreams': 'Let this year be your year of triumph! May every dream you cherish come true with hard work and dedication! 🌟',
+                'Magic & Joy': 'Life is magical when you\'re in it, Marhaba! Fill this year with laughter, adventure, and beautiful memories! ✨'
+            };
+            document.getElementById('modal-text').innerText = messages[type];
+            document.getElementById('modal').classList.remove('hidden');
+            
+            // Celebration effect
+            for(let i = 0; i < 20; i++) {
+                setTimeout(() => createButterfly(), i * 60);
+            }
+        }
+
+        function openSpecialGift() {
+            document.getElementById('modal-title').innerText = "💖 A Heartfelt Wish";
+            document.getElementById('modal-text').innerHTML = "Marhaba, you are as graceful and wonderful as a butterfly in flight. Your presence makes the world more beautiful. May your year be filled with laughter, success, endless love, and all the dreams you've ever imagined. You deserve nothing but the best! With all my love and gratitude, Happy Birthday! 🦋✨";
+            document.getElementById('signature-block').classList.remove('hidden');
+            document.getElementById('modal').classList.remove('hidden');
+            
+            // Grand celebration
+            for(let i = 0; i < 40; i++) {
+                setTimeout(() => {
+                    createButterfly();
+                    if(i % 2 === 0) createBalloon();
+                }, i * 50);
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
